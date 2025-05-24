@@ -1,5 +1,13 @@
+import SearchBar from "../SearchBar/SearchBar";
+
 export default function App() {
-  const apiKey = import.meta.env.VITE_API_KEY;
-  console.log("API Key:", apiKey);
-  return <></>;
+  const handleSearch = (query: string) => {
+    console.log("Пошуковий запит:", query);
+    // Тут твоя логіка пошуку або обробки запиту
+  };
+  return (
+    <>
+      <SearchBar onSubmit={handleSearch} />
+    </>
+  );
 }
