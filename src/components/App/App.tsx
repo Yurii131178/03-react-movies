@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { fetchMovies } from "../../services/movieService";
 import { type Movie } from "../../types/movie";
 import SearchBar from "../SearchBar/SearchBar";
@@ -38,28 +38,6 @@ export default function App() {
   const handleCloseModal = () => {
     setSelectedMovie(null);
   };
-
-  useEffect(() => {
-    if (!selectedMovie) {
-      document.body.style.overflow = "";
-      return;
-    }
-
-    document.body.style.overflow = "hidden";
-
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        handleCloseModal();
-      }
-    };
-
-    window.addEventListener("keydown", handleEsc);
-
-    return () => {
-      window.removeEventListener("keydown", handleEsc);
-      document.body.style.overflow = "";
-    };
-  }, [selectedMovie]);
 
   return (
     <>

@@ -9,26 +9,19 @@ interface MovieModalProps {
 
 export default function MovieModal({ movie, onClose }: MovieModalProps) {
   useEffect(() => {
+    document.body.style.overflow = "hidden";
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose();
       }
     };
 
-    const disableScroll = () => {
-      document.body.style.overflow = "hidden";
-    };
-
-    const enableScroll = () => {
-      document.body.style.overflow = "";
-    };
-
     window.addEventListener("keydown", handleKeyDown);
-    disableScroll();
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-      enableScroll();
+      document.body.style.overflow = "";
     };
   }, [onClose]);
 
