@@ -1,32 +1,3 @@
-// import { Toaster } from "react-hot-toast";
-// import SearchBar from "../SearchBar/SearchBar";
-// import MovieGrid from "../MovieGrid/MovieGrid";
-// import { useState } from "react";
-// import { type Movie } from "../../types/movie";
-
-// export default function App() {
-//   const [movies, setMovies] = useState<Movie[]>([]); // Додай типізацію масиву
-
-//   const handleSearch = (query: string) => {
-//     console.log(query);
-//     // Тут буде моя логіка пошуку або обробки запиту :)
-//     setMovies([]); // Поки що порожній масив
-//   };
-
-//   const handleSelectMovie = (movie: Movie) => {
-//     console.log("Selected movie:", movie);
-//   };
-
-//   return (
-//     <>
-//       <SearchBar onSubmit={handleSearch} />
-//       <Toaster />
-//       <MovieGrid onSelect={handleSelectMovie} movies={movies} />
-//     </>
-//   );
-// }
-///////////////////////////////////////////////////////////
-
 import { useState, useEffect } from "react";
 import { fetchMovies } from "../../services/movieService";
 import { type Movie } from "../../types/movie";
@@ -68,18 +39,14 @@ export default function App() {
     setSelectedMovie(null);
   };
 
-  // --- Блокування скролу та закриття модалки по ESC ---
   useEffect(() => {
     if (!selectedMovie) {
-      // Якщо модалка закрита — відновити прокрутку сторінки
       document.body.style.overflow = "";
       return;
     }
 
-    // Заборонити прокрутку тіла сторінки
     document.body.style.overflow = "hidden";
 
-    // Обробник натискання ESC
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         handleCloseModal();
@@ -88,7 +55,6 @@ export default function App() {
 
     window.addEventListener("keydown", handleEsc);
 
-    // Очищення слухача при розмонтуванні / зміні selectedMovie
     return () => {
       window.removeEventListener("keydown", handleEsc);
       document.body.style.overflow = "";
